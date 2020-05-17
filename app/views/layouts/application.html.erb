@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <title>Bootrails</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+ 
+  </head>
+
+  <body style="background-color: #f1f1f1">
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <%= link_to image_tag("lafoca", alt: "LA FocA", class: "navbar-brand"), {controller: "home"} %>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item ">
+              <%= link_to " Início", {controller: "home"}, class: "nav-link fa fa-home" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to " Equipe", {controller: "equipe"}, class: "nav-link fa fa-users" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to " Sobre", {controller: "sobre"}, class: "nav-link fa fa-info-circle" %>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <div class="container" style=" background-color: #fff; max-width: 960px;">
+    	<%= yield %>
+    </div>
+
+    <script type="text/javascript">  
+      $(document).ready(function(){  
+
+        var input = '<div class="row">'+
+            '<div class="col-6">'+
+              '<%= label_tag(:nome_atributo, "Nome:") %>'+
+              '<%= text_field_tag 'nome_atributo[]', nil, placeholder: 'Nome do atributo', required: true, class: "form-control" %>'+
+            '</div>'+
+            '<div class="col-3">'+
+              '<%= label_tag(:tipo_dado, "Tipo:") %>'+
+              '<%= select_tag "tipo_dado[]", raw('<option value="integer">Integer</option><option value="float">Float</option><option value="string">String</option>'), prompt: "Selecione o tipo", class: "form-control" %>'+
+            '</div>'+
+            '<div class="col-3">'+
+              '<%= button_icon '<i class="fa fa-minus-circle"></i> Remover', class: "btn btn-outline-danger btn-remover", type: "button" %>'+
+            '</div>'+
+        '</div>';
+          
+          $("button[name='add']").click(function( e ){  
+              $('#inputs_adicionais').append( input );  
+          });  
+       
+          $('#inputs_adicionais').delegate('button','click',function( e ){  
+              e.preventDefault();  
+              $( this ).parent().parent('div').remove();  
+          });  
+       
+      });  
+    </script> 
+  </body>
+</html>

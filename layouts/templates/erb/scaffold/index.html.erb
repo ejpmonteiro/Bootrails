@@ -1,0 +1,31 @@
+<p id="notice"><%%= notice %></p>
+
+<h1><%= plural_table_name.titleize %></h1>
+
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <% attributes.reject(&:password_digest?).each do |attribute| -%>
+      <th scope="col"><%= attribute.human_name %></th>
+      <% end -%>
+      <th scope="col">Opções</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
+    <tr>
+      <% attributes.reject(&:password_digest?).each do |attribute| -%>
+      <td><%%= <%= singular_table_name %>.<%= attribute.name %> %></td>
+      <% end -%>
+      <td><%%= link_to ' Exibir', <%= singular_table_name %>,   class: "btn btn-info fa fa-search", style: "color: #fff" %></td>
+      <td><%%= link_to ' Editar', edit_<%= singular_table_name %>_path(<%= singular_table_name %>), class: "btn btn-warning fa fa-pencil", style: "color: #fff" %></td>
+      <td><%%= link_to ' Excluir', <%= singular_table_name %>, method: :delete, data: { confirm: 'Você tem certeza?' }, class: "btn btn-danger fa fa-trash", style: "color: #fff" %></td>
+    </tr>
+    <%% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%%= link_to ' Novo <%= singular_table_name.titleize %>', new_<%= singular_table_name %>_path, class: "btn btn-success fa fa-plus float-right",style: "color: #fff"  %>

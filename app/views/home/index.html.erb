@@ -1,0 +1,67 @@
+<div class="row">
+	<div class="col-12">
+		<h1 class="text-center" style="margin-top: 3rem;"><%= image_tag("bootrails.png", alt: "bootrails") %></h1>
+		<h5 class="text-center" style="margin-bottom: 3rem;">Crie seu projeto de forma simples e rápida!</h5>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-12">
+		<%= form_tag("/criar", method: "post") do %>
+		<div class="form-group">
+			<%= label_tag(:nome_projeto, "Nome:") %>
+			<%= text_field_tag 'nome_projeto', nil, placeholder: 'Nome do projeto', autofocus: true, required: true, class: "form-control" %>
+		</div>
+		<div class="form-group">
+			<%= label_tag(:nome_entidade, "Entidade:") %>
+			<%= text_field_tag 'nome_entidade', nil, placeholder: 'Nome da entidade', required: true, class: "form-control" %>
+		</div>
+		<div class="form-group">
+			<label>Atributos:</label>	
+			<label style="display: block"><%= button_icon "<i class='fa fa-plus'></i> Adicionar atributo", name: "add", class: "btn btn-outline-primary", type: "button" %></label>
+			<fieldset id="inputs_adicionais" style="border: none">  
+			</fieldset>
+		</div>
+		<%= button_tag_icon "<i class='fa fa-check-circle'></i> Criar projeto", class: "btn btn-outline-success float-right" %>
+		<br><br>
+		<% end %>
+	</div>
+</div>
+<br>
+<div class="row">
+	<div class="col-12">
+		<div class="card">
+			<div class="card-header bg-primary text-center">
+				<h4 class="text-white">Projetos</h4>
+			</div>
+			<div class="card-body">
+				<div class="col-12">
+					<div class="table-responsive">
+						<table class="table table-hover table-striped table-sm">
+							<thead>
+								<th>ID</th>
+								<th>Nome</th>
+								<th>Projeto</th>
+								<th>Url</th>
+								<th>Opções</th>
+							</thead>
+							<tbody>
+								<% @projetos.each do |projeto| %>
+								<tr>
+									<td><%= projeto.id %></td>
+									<td><%= projeto.nome %></td>
+									<td><%= projeto.projeto %></td>
+									<td><%= link_to nil, projeto.url, target: '_blank', style: 'color: #000; text-decoration: none;' %></td>
+									<td><%= link_to ' Baixar', { action: :download_projeto, diretorio: projeto.projeto }, class: 'btn btn-primary fa fa-download' %></td>
+									<td><%= link_to ' Excluir', { action: :destroy, id: projeto.id }, data: { confirm: 'Você tem certeza?' }, class: 'btn btn-danger fa fa-trash' %></td>
+								</tr>
+								<% end %>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		<br>
+	</div>
+</div>
