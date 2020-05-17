@@ -8,7 +8,7 @@ module Bootrails
 		end
 		
 		def diretorio(diretorio)
-			tmp_dir = File.join(Dir::home, "projetos/"+diretorio)
+			tmp_dir = File.join(Dir::home, diretorio)
 			Dir.mkdir(tmp_dir)
 			return tmp_dir
 		end
@@ -52,7 +52,7 @@ module Bootrails
 		end
 
 		def download_projeto
-			send_file "#{::Rails.root.join("projetos")}/"+params[:diretorio]+'.zip'
+			send_file "#{::Rails.root.join("projects")}/"+params[:diretorio]+'.zip'
 		end
 
 		def gera_porta

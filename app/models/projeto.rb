@@ -13,6 +13,6 @@ class Projeto < ApplicationRecord
 	end
 
 	def self.copia_projeto(diretorio)
-		FileUtils.mv(diretorio+".zip", ::Rails.root.join("projetos"))
+		FileUtils.mv(diretorio+".zip", ::Rails.root.join("projects"))
 	end
 end

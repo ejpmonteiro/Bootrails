@@ -42,7 +42,7 @@ class HomeController < ApplicationController
 	end
 
 	def download_projeto
-		send_file "#{::Rails.root.join("projetos")}/"+params[:diretorio]+'.zip'
+		send_file "#{::Rails.root.join("projects")}/"+params[:diretorio]+'.zip'
 	end
 
 	def destroy
